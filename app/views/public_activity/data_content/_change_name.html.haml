@@ -1,0 +1,5 @@
+updated content 
+%span= link_to activity.trackable.title, data_content_path(activity.trackable), :remote => 'true'
+- if activity.parameters[:channel_no]
+  = "(Extension no: " + activity.parameters[:channel_no] + ")"
+from  "#{activity.parameters[:old_name]}" to  "#{activity.parameters[:new_name]}"

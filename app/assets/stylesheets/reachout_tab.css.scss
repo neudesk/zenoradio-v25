@@ -1,0 +1,38 @@
+// Place all the styles related to the ReachoutTab controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#campaigns
+{
+  cursor: pointer;
+}
+.campaign_box
+{
+  display: none;
+}
+.schedule
+{
+  width: 300px;
+  float: left;
+  margin-right: 10px;
+}
+
+#prompt
+{
+  margin-bottom: 10px;
+}
+.row .schedule
+{
+  vertical-align: middle;
+  line-height: 15px;
+}
+.row span{
+  line-height: 15px;vertical-align: middle;
+}
+#datepicker
+{
+  display: none;
+}
+.schedule_lbl
+{
+  padding-left: 4px;
+}

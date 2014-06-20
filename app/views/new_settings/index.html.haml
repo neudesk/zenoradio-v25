@@ -1,0 +1,115 @@
+.row#search_station
+  = simple_form_for @q, url: new_settings_path, method: :get do |f|
+    .col-sm-3
+      .input-group.input-group-sm
+        = f.input :title_cont, label: false, placeholder: "Enter Keyword Here", input_html: {class: "form-control search_by_station_name"}
+        .input-group-btn
+          = f.submit "Search", class: "btn btn-primary search_button"
+    .col-sm-2
+      = f.input :country_title_cont, label: false, as: :select, collection: current_user.station_countries.collect {|x| [x.title, x.title] }, prompt: "Filter by Country", input_html: {class: "submit_via_onchange"}
+    - if current_user.is_marketer?
+      .col-sm-2
+        = f.input :rca_group_title_cont, label: false, as: :select, include_blank: true, collection: DataGroupRca.all.collect {|x| [x.title, x.title] }, prompt: "Filter by RCA", input_html: {class: "submit_via_onchange"}
+        - if @station.present?
+          = hidden_field_tag :station_id, @station.id
+
+      .col-sm-2.col-sm-offset-1
+        = link_to "#new_station", class: "btn btn-sm btn-primary", data: {toggle: "modal"} do
+          = "Add New Station"
+      .col-sm-2
+        .pull-right.station_pagination
+          = text_field_tag :page, @page, size: 1
+          = "of #{@stations.total_pages}"
+  .col-sm-12{:style=>"padding-bottom: 20px"}
+    .page_left
+      = link_to_previous_page @stations, image_tag("left_arrow.png", width: 40, height: 40), params: params, tip: "Previous Page"
+    .page_right
+      = link_to_next_page @stations, image_tag("right_arrow.png", width: 40, height: 40), params: params, tip: "Next Page"
+    .row#station_list
+      - if @stations.present?
+        - @stations.each do |station|
+          .station_box.col-lg-3.col-md-4.col-sm-6
+            .station_name.active
+              %a{:href=>"#{(@station.present? && station == @station ? '#' : new_settings_path(shared_params(station.id)))}", :style => "display: block; position: relative"}
+                %span.station_avatar
+                  %span{:style=>"background: url('#{(station.logo.exists? ? station.logo.url(:xhdpi) : image_path('radio.png'))}') center center; background-size: 80px"}
+                %span{:style => "position: absolute; top: 12px; left: 80px; text-align: left;"}
+                  = station.title.titleize
+      - else 
+        = render "shared/no_records", msg: "No stations found."
+- if @station.present?
+  %br
+  .row
+    .col-sm-1
+      %span.station_avatar
+        %span{:style=>"background: url(#{(@station.logo.exists? ? @station.logo.url(:xhdpi) : image_path('radio.png'))}) center center; background-size: 80px"}
+    .col-sm-8
+      %h2{:style => "color: #59B2E5"}
+        = @station.title.titleize
+      %hr
+    .col-sm-8
+      .panel.panel-default
+        .panel-heading
+          %i.fa.fa-phone
+          = "Phone Numbers"
+          .pull-right.panel-heading-buttons
+            - if @phone_numbers.present?
+              = link_to "#", class: "btn btn-sm btn-default open_delete", tip: "Delete Phone Number" do
+                %i.fa.fa-wrench
+              = link_to "#", class: "btn btn-sm btn-default close_delete", tip: "Cancel" do
+                %i.clip-close
+            = link_to "#new_phone", class: "btn btn-sm btn-default", tip: "Add phone number", data: {toggle: "modal"} do
+              %i.fa.fa-plus
+        .panel-body
+          - if @phone_numbers.present?
+            .phone_numbers
+              - @phone_numbers.each do |phone|
+                %span.label.label-inverse{tip: phone.title}
+                  = phone.did_e164
+            .phone_form
+              = simple_form_for @station, url: manage_phones_data_gateway_path(@station), method: :post, html: {id: "manage_phones_form"} do |f|
+                - @phone_numbers.each do |phone|
+                  %span.label.label-inverse{tip: phone.title}
+                    = check_box_tag 'selected_dids[]', phone.id, false, class: "icheck-me", data: {color: "blue", skin: "square"}
+                    %span.check_box_note
+                      = phone.did_e164
+                .row
+                  .col-sm-12.aright
+                    = f.submit "Delete", class: "btn btn-sm btn-primary", confirm: "Are you sure you want to delete these phone numbers?", data: {target: "manage_phones_form"}
+          - else
+            = render "shared/no_records", msg: "No phone numbers found."                    
+
+      .tabbable
+        %ul.nav.nav-tabs.tab-bricky
+          %li{class: "#{ 'active' if flash[:hash].nil? || flash[:hash] == "extensions"}"}
+            = link_to "Extensions", "#extensions", data: {toggle: "tab"}
+          %li{class: "#{ 'active' if flash[:hash] == "prompts"}"}
+            = link_to "Prompts", "#prompts", data: {toggle: "tab"}
+          %li{class: "#{ 'active' if flash[:hash] == "information"}"}
+            = link_to "Station Information", "#information", data: {toggle: "tab"}
+        .tab-content
+          .tab-pane#extensions{class: "#{ 'active' if flash[:hash].nil? || flash[:hash] == "extensions"}"}
+            = render "extensions"
+          .tab-pane#prompts{class: "#{ 'active' if flash[:hash] == "prompts"}"}
+            = render "prompts"
+          .tab-pane#information{class: "#{ 'active' if flash[:hash] == "information"}"}
+            = render "information"
+
+    .col-sm-4
+      = render "graphs"
+  - if marketer?
+    .row
+      .col-sm-12
+        .tabbable
+          %ul.nav.nav-tabs.tab-bricky
+            %li#data_groups_button
+              = link_to "Data Groups", data_groups_mass_updates_path(group: "RCA", country_id: DataGroupCountry.find_by_iso_alpha_2("US").id), remote: true, method: :get
+            %li#data_tags_button
+              = link_to "Tags", data_tags_mass_updates_path(tag: "Country"), remote: true, method: :get
+          .tab-content
+            .tab-pane#data_groups
+            .tab-pane#data_tags
+
+
+  = render "new_phone_modal"
+= render "new_station_modal"

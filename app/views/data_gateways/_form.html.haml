@@ -1,0 +1,17 @@
+= simple_form_for @new_station, html: {id: "new_station_form"}, multipart: true, remote: true  do |f|
+  .form-inputs
+    .row
+      .col-sm-12
+        = f.input :title, input_html: {class: "form-control"}
+        = f.input :country_id, as: :select, collection: DataGroupCountry.all.collect { |x| [x.title, x.id]}
+        = f.input :language_id, as: :select, collection: DataGroupLanguage.all.collect { |x| [x.title, x.id]}
+        = f.input :broadcast_id, as: :select, collection: DataGroupBroadcast.all.collect { |x| [x.title, x.id]}
+        = f.input :rca_id, as: :select, collection: DataGroupRca.all.collect { |x| [x.title, x.id]}
+        = f.input :website, input_html: {class: "form-control"}
+      .col-sm-8
+        = f.input :logo, input_html: {class: "form-control"}
+      .col-sm-4
+        %br
+        %br
+        = f.label :flag_broadcaster, label: "Broadcaster?"
+        = f.check_box :flag_broadcaster, class: "icheck-me", data: {color: "blue", skin: "square"}

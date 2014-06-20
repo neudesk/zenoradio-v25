@@ -1,0 +1,9 @@
+.tabbable
+  %ul#myTab.nav.nav-tabs.tab-bricky
+    %li.active
+      = link_to "Unprocessed", pending_users_path
+    %li
+      = link_to "Processed", all_pending_users_path
+  .tab-content
+    .tab-pane.in.active
+      = render "list"

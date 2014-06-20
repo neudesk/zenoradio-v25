@@ -1,0 +1,85 @@
+.campaign_gateways
+{
+  margin: 0px ;
+}
+.campaigns
+{
+  float: left;
+  width: 100%;
+}
+.campaign_gateways li
+{
+  list-style: none;
+}
+.campaign_gateways .campaign_list
+{
+  float:left;
+  background-color: #F3F7F8;
+  width:918px;
+  border-left: 1px Solid #569197;
+  padding-bottom: 5px;
+  line-height: 30px;
+  padding-left: 20px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.campaigns .cmp_table
+{
+  display: none;
+}
+.campaign_table
+{
+  width:100%;
+  border: 1px Solid #D8D8D8;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.campaign_table th
+{
+  color:#555555;
+  text-align: center;
+  font-size: 12px;
+  border: 1px Solid #D8D8D8;
+}
+.campaign_table td
+{
+  color:#555555;
+  padding-left: 10px;
+  border: 1px Solid #D8D8D8;
+}
+.campaign_table tr.even
+{
+  background-color: #F8F8F8;
+}
+.show_campaign_status
+{
+  cursor: pointer;
+}
+.stats
+{
+  width:95%;
+  border: 1px Solid #D8D8D8;
+  margin: 15px;
+  margin: 15px;
+}
+.stats th
+{
+  color:#555555;
+  text-align: center;
+  font-size: 12px;
+}
+.stats td
+{
+  color:#555555;
+  padding-left: 10px;
+  border: 1px dotted #D8D8D8;
+}
+.stats tr.odd
+{
+  background-color: #EFFBEF;
+}
+.stats tr.even
+{
+  background-color: #E0F8E0;
+}

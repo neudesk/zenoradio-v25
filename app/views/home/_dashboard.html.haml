@@ -1,0 +1,15 @@
+= hidden_field_tag  "type","gateway"
+.summary_head_list
+  -if @result_total.present? 
+    = render :partial => "summary_head_list"
+  - else
+    %h3 No results for current user
+.summary_list
+  - if @stations_result.present?
+    = render :partial => "summary_list_head"
+  - else
+    %h3 No results for current user
+  - if @stations_result.present?
+    = paginate  @stations_result
+
+ 

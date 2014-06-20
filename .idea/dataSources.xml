@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="4270809437">
+    <data-source source="LOCAL" name="Rails zenoradio: development" uuid="2adb0474-68da-434b-bfce-dd09df9a2135">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/zenoradio-v25</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfcbdfc8dfc9</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails zenoradio: staging" uuid="0911bbc4-536e-4371-ad16-c9c397a3d90c">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/zenoradio-v25</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfcbdfc8dfc9</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails zenoradio: production" uuid="16175623-7f0d-48ba-ae5c-3cf41b6cc64b">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/radio_prod</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfcbdfc8dfc9</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails zenoradio: test" uuid="d33b4940-255b-4f14-a3be-1a1ef81faa44">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/radio_test</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfcbdfc8dfc9</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails zenoradio: cucumber" uuid="2248f96d-6251-4bf8-93a2-9d3c8db3cf2c">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/radio_test</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfcbdfc8dfc9</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

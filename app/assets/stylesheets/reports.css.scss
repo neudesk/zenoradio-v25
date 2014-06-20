@@ -1,0 +1,41 @@
+.reports_table
+{
+  color:#000;
+  width:940px;
+}
+.reports_table thead
+{
+  border: 1px solid #DDDDDD;
+  background-color: #EEE;
+}
+.reports_table th{
+  padding: 5px;
+}
+.reports_table td
+{
+  margin: 10px;
+  text-align: right;
+  padding: 5px;
+}
+.reports_table td.day
+{
+  text-align: center;
+}
+.reports_table th,.reports_table td
+{
+  border: 1px solid #DDDDDD;
+}
+.reports_table tr.even
+{
+  background-color: #F8F8F8;
+}
+.day_no
+{
+  text-align: center !important;
+  width: 18px;
+}
+.day_name 
+{
+  text-align: center !important;
+  width: 40px;
+}

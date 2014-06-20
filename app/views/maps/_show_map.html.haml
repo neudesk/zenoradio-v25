@@ -1,0 +1,28 @@
+%div{:style => "width: 940px;margin-bottom:30px;"}
+  -if @map_of_listeners[:results].present?
+    #map{:style =>  "width: 940px; height: 400px;"}
+.row.space12
+  %ul.mini-stats.col-sm-12
+    %li.col-sm-4
+      .sparkline_bar_good
+        %span>
+          %canvas{height: "24", style: "display: inline-block; width: 41px; height: 24px; vertical-align: top;", width: "41"}
+      .values
+        %strong{:class=>"total_listeners"}
+        Total listeners
+    %li.col-sm-4
+      .sparkline_bar_neutral
+        %span>
+          %canvas{height: "24", style: "display: inline-block; width: 47px; height: 24px; vertical-align: top;", width: "47"}
+      .values
+        %strong{:class=>"uniq_listeners"}
+        Unique Listeners
+    %li.col-sm-4
+      .sparkline_bar_bad
+        %span>
+          %canvas{height: "24", style: "display: inline-block; width: 41px; height: 24px; vertical-align: top;", width: "41"}
+      .values
+        %strong{:class=>"us_listeners"}
+        US Listeners
+
+

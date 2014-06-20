@@ -1,0 +1,27 @@
+.row
+  .col-sm-12
+    .page-header.main
+      .pull-right.header-buttons
+        - if params[:from].present? || params[:from] == "index"
+          = link_to users_account_users_path, class: "btn btn-primary with-margin-right" do
+            %i.fa.fa-hand-o-left
+            Back
+        - else
+          = link_to my_account_path, class: "btn btn-primary with-margin-right" do
+            %i.fa.fa-hand-o-left
+            Back
+        = link_to new_user_path, class: "btn btn-primary" do
+          %i.clip-user-plus
+          Create New
+      %h1
+        = "Edit Account"
+
+.row
+  .col-sm-12
+    = simple_form_for @user, url: user_path(id: @user.id), method: :put do |f|
+      = render "form", f: f
+
+
+
+
+

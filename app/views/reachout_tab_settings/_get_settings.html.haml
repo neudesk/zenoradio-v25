@@ -1,0 +1,33 @@
+%table.settings_table
+  %thead
+    %tr
+      %th= "#"
+      %th= "Setting Name"
+      %th= "Value"
+  %tbody
+    - @settings.each_with_index do |s,index|
+      %tr{:class => cycle("odd", "even")}
+        %td= index+1
+        %td= s.name
+        %td.setting_value
+          - if s.value.match(/\A[+-]?\d+?(_?\d+)*(\.\d+e?\d*)?\Z/)
+            %input{:type=>"number", :value => s.value, :class=>"num_value", :data =>{"val" => s.id}}
+          - elsif s.name == "Call Time"
+            %div{:class => "call_time_setting"}
+              %p Start Time 
+              %input{:type=>"number", :value => @val1, :id=>'val1', :class=>"num_value",:min => 0, :max => 24, :data =>{"val" => s.id}}
+            %div{:class => "call_time_setting"}
+              %p End Time 
+              %input{:type=>"number", :value => @val2, :id=>'val2', :class=>"num_value", :min => 0, :max => 24, :data =>{"val" => s.id}}
+%br
+%a{:id=>'settings_new'}="Add new setting"
+%div.settings_form
+  %form{:id => "settings_form"}
+    = text_field_tag "name" , "", placeholder: 'Name'
+    = text_field_tag "value", "", placeholder: 'Value'
+    %a{:class => 'btn', :id => "save_settings"}= "Save"
+- content_for :js do
+  :javascript
+    $(document).ready(function(){
+      window.ReachoutTabSettings = new ReachoutTabSettings()
+    });

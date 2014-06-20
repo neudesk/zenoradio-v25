@@ -1,0 +1,46 @@
+%div 
+  %table.stats
+    %thead
+      %tr
+        %th Status
+        %th Status Name
+        %th Sent
+        %th Not sent
+    %tbody
+      - camapaign_status["stats"]["statuses"]["total_stats"].each do |st|
+        %tr{:class => cycle('odd', 'even')} 
+          %td= st["status"].to_s
+          - status = GoAutoDialStatuses.find_by_status(st["status"])
+          %td= status.present? ? status.status_name : "-"
+          %td= st["status_yes"].to_s
+          %td= st["status_no"].to_s
+    %tfoot
+      %tr
+        %td{:colspan => 2}
+          %b Total for ALL List ID's under 
+        %td
+          %b= camapaign_status["stats"]["statuses"]["totalAll"].to_s
+        %td
+%br
+%div 
+  %table.stats
+    %thead
+      %tr
+        %th Zone
+        %th Local Time
+        %th Sent
+        %th Not sent
+    %tbody
+      - camapaign_status["stats"]["zones"]["total_zones"].each do |st|
+        %tr{:class => cycle('odd', 'even')} 
+          %td= st["zone"].to_s
+          %td= st["local_date"]
+          %td= st["zone_yes"].to_s
+          %td= st["zone_no"].to_s
+    %tfoot
+      %tr
+        %td{:colspan => 2}
+          %b Total for ALL List ID's under 
+        %td
+          %b= camapaign_status["stats"]["statuses"]["totalAll"].to_s
+        %td

@@ -1,0 +1,47 @@
+.loaded
+  = simple_form_for @station, url: update_station_data_gateway_path(@station.id), multipart: true, method: :put, remote: :true do |f|
+    .row
+      .col-sm-4
+        = f.input :title, label: "Station Name", input_html: { class: "form-control"}
+      .col-sm-4
+        = f.input :broadcast_id, as: :string, label: "Broadcaster",input_html: { value: @station.broadcaster_group.try(:title), class: "form-control"}, disabled: true
+      .col-sm-4
+        = f.input :country_id, as: :select, label: "Country", collection: DataGroupCountry.all.collect { |x| [x.title, x.id] }
+    .row
+      .col-sm-4
+        = f.input :rca_id, as: :select, label: "RCA", collection: DataGroupRca.all.collect { |x| [x.title, x.id] }
+      .col-sm-4
+        = f.input :website, label: "Website", input_html: { class: "form-control"}
+      .col-sm-4
+        = f.input :logo, as: :file, input_html: { class: "form-control"}
+    .row
+      .col-sm-12
+        %table.table.table-hover
+          %thead
+            %tr
+              %th= "Station Name"
+              %th.acenter
+                = "Language"
+              %th.acenter
+                = "Genre"
+              %th.acenter
+                = "Country"
+          %tbody
+            - idx = 1
+            = f.fields_for :data_gateway_conferences do |ff|
+              %tr{class: "#{ idx % 2 == 0 ? 'even' : 'odd' }"}
+                = ff.fields_for :content do |fff|
+                  %td
+                    = "#{idx}. #{fff.object.title}" 
+                    - idx = idx + 1
+                  %td 
+                    = fff.input :language_id, label: false, as: :select, collection: DataGroupLanguage.all.collect{ |x| [x.title, x.id]}
+                  %td
+                    = fff.input :genre_id, label: false, as: :select, collection: DataGroupGenre.all.collect{ |x| [x.title, x.id]}
+                  %td
+                    = fff.input :country_id, label: false, as: :select, collection: DataGroupCountry.all.collect{ |x| [x.title, x.id]}
+    .row
+      .col-sm-12
+        = f.submit "Save", class: "btn btn-green ajax-submit"
+.loading
+  = render "shared/loading"

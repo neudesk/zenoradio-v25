@@ -1,0 +1,103 @@
+%script{:src =>  "//maps.google.com/maps/api/js?v=3.13&sensor=false&libraries=geometry", :type => "text/javascript"}
+%script{:src => "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js", :type=> "text/javascript"}
+/ Main hero unit for a primary marketing message or call to action
+/ For slides
+-#.slider
+-#  = render "shared/slides"
+/= Gateway.accessible_by(@a, :read)[0].inspect
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        .fa.fa-external-link-square
+        Recent Listeners Activity
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href=>"#"}
+      .panel-body
+        .flot-container
+          %div.flot-placeholder{:id => 'placeholder'}
+        
+  .col-md-12
+    .col-md-3
+      %a.btn.btn-block.btn-large.btn-success{:href => '#maps'}
+        %i.fa.fa-map-marker.fa-3x
+        = "Maps".upcase
+    .col-md-3
+      %a.btn.btn-block.btn-large.btn-info{:href => graphs_path}
+        %i.fa.fa-bar-chart-o.fa-3x
+        = "Chart".upcase
+    .col-md-3
+      %a.btn.btn-block.btn-large.btn-warning{:href => reports_path}
+        %i.fa.fa-file-excel-o.fa-3x
+        = "Reports".upcase
+    .col-md-3
+      %a.btn.btn-block.btn-large.btn-danger{:href => new_settings_path}
+        %i.fa.fa-signal.fa-3x
+        = "Stations".upcase
+        
+    -if (current_user.is_rca?)
+      %div
+        %div.switcher
+          - if params["type"] == "minutes"
+            %a{:href => "/?type=minutes", :class =>"btn_active"} Minutes
+            %a{:href => "/?type=percentage", :class =>"btn"} Percentage
+          -elsif params["type"] == "percentage"
+            %a{:href => "?type=minutes", :class =>"btn"} Minutes
+            %a{:href => "/?type=percentage", :class =>"btn_active"} Percentage
+          -else
+            %a{:href => "?type=minutes", :class =>"btn"} Minutes
+            %a{:href => "/?type=percentage", :class =>"btn_active"} Percentage
+        %br
+        -if  @result.length > 5
+          %bottom
+            - if params[:type]== "minutes"
+              %div.left{:style=>"float:left;"}
+                %p= "Current Top 3 Most Growth"
+                =render :partial => "data_numerical_reports/top_3_minutes" ,:locals => {:result => @result.first(3)}
+                %br
+              %div.right{:style=>"float:left;"}
+                %p{:class => "drop"}= "Current Top 3 Most Drop"
+                =render :partial => "data_numerical_reports/top_3_minutes", :locals => {:result => @result.last(3).sort{|a, b| b[3].to_i <=> a[3].to_i}}
+            - else
+              %div.left{:style=>"float:left;"}
+                %p= "Current Top 3 Most Growth"
+                =render :partial => "data_numerical_reports/top_3_percentage" ,:locals => {:result => @result.last(3).sort{|a, b| a[3].to_i <=> b[3].to_i}}
+                %br
+              %div.left{:style=>"float:left;"}
+                %p{:class => "drop"}= "Current Top 3 Most Drop"
+                =render :partial => "data_numerical_reports/top_3_percentage", :locals => {:result => @result.first(3).sort{|a, b| b[3].to_i <=> a[3].to_i}}
+        -else
+          %bottom
+            -if params[:type]== "minutes"
+              %p= "Current Top 3 Most Growth"
+              =render :partial => "data_numerical_reports/top_3_minutes" ,:locals => {:result => @result.first(3)}
+            -else
+              %p= "Current Top 3 Most Growth"
+              =render :partial => "data_numerical_reports/top_3_percentage" ,:locals => {:result => @result.first(3)}
+%br
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading
+        .fa.fa-external-link-square
+        Maps and Sessions
+        .panel-tools
+          %a.btn.btn-xs.btn-link.panel-collapse.collapses{:href=>"#"}
+      .panel-body
+        - if !current_user.is_marketer?
+          - if @map_of_listeners.present?
+            = render "maps/show_map"
+          -else
+            No data available to US map!
+        %div{:style=>"clear:both;margin-top:15px;"}
+          = render "dashboard"
+
+
+- content_for :js do
+  :javascript
+    $(document).ready(function(){
+      Main.init();
+      Charts.init();
+    });
+
+

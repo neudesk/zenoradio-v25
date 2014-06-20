@@ -1,0 +1,27 @@
+#new_extension.modal{"aria-hidden" => "true", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        .modal_title
+          %h4= "New or Add Existing Stream"
+      .modal-body
+        .row-fluid
+          .span12
+            = simple_form_for @new_extension, url: create_extension_data_gateway_path(@station), method: :post, html: {id: "new_extension_form"}, multipart: true  do |f|
+              .form-inputs
+                .controls
+                  %label.control-label{for: "data_content_media_url"}= "Media URL"
+                  #stream_url_div
+                %span#url_found{style: "color: red;"}
+                  = "Stream found. Enter a channel number."
+                #new_extension_fields
+                  = f.input :title, input_html: {class: "form-control"}
+                  = f.input :country_id, as: :select, collection: DataGroupCountry.all.collect{ |x| [x.title, x.id]}
+                  = f.input :language_id, as: :select, collection: DataGroupLanguage.all.collect{ |x| [x.title, x.id]}
+                  = f.input :genre_id, as: :select, collection: DataGroupGenre.all.collect{ |x| [x.title, x.id]}
+                  = f.input :media_type, as: :select, collection: PLAYER_TYPE.collect{|x| [x, x]}, input_html: {class: "without_search"}
+                  = f.input :backup_media_url, input_html: {class: "form-control"}
+                = f.input :extension, label: "Channel Number", input_html: {class: "form-control"}
+      .modal-footer
+        = link_to "Close", "#", class: "btn btn-default", "aria-hidden" => "true", "data-dismiss" => "modal"
+        = link_to "Send", "#", class: "btn btn-dark-grey form-submitter", data: {target: "new_extension_form"}

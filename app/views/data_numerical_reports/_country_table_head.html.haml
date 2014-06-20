@@ -1,0 +1,32 @@
+- if params[:sort].present? && params[:sort]=="ASC"
+  - sort = "DESC"
+  - css_class = "fa fa-angle-up"
+- else
+  - sort = "ASC"
+  - css_class = "fa fa-angle-down"
+%tr
+  %th
+    %a{:href => "/data_numerical_reports/country_minutes?type=#{params[:type]}&sort_field=country&sort=#{sort}"}
+      ="Country"
+    %i{:class =>(params[:sort_field]=="country" ? css_class : "")}
+  - if params[:type] == "minutes" || params[:type] == "users"
+    %th
+      %a{:href => "/data_numerical_reports/country_minutes?type=#{params[:type]}&sort_field=four_weeks&sort=#{sort}"}
+        =  4.week.ago.at_beginning_of_week(:sunday).strftime("%b %e") + " - " + 4.week.ago.end_of_week(:sunday).strftime("%b %e")
+      %i{:class =>(params[:sort_field]=="four_weeks" ? css_class : "")} 
+  %th
+    %a{:href => "/data_numerical_reports/country_minutes?type=#{params[:type]}&sort_field=three_weeks&sort=#{sort}"}
+      =  3.week.ago.at_beginning_of_week(:sunday).strftime("%b %e") + " - " + 3.week.ago.end_of_week(:sunday).strftime("%b %e")
+    %i{:class =>(params[:sort_field]=="three_weeks" ? css_class : "")}
+  %th
+    %a{:href =>"/data_numerical_reports/country_minutes?type=#{params[:type]}&sort_field=two_weeks&sort=#{sort}"}
+      = 2.week.ago.at_beginning_of_week(:sunday).strftime("%b %e") + " - " + 2.week.ago.end_of_week(:sunday).strftime("%b %e")
+    %i{:class =>(params[:sort_field]=="two_weeks" ? css_class : "")}
+  %th
+    %a{:href =>"/data_numerical_reports/country_minutes?type=#{params[:type]}&sort_field=one_week&sort=#{sort}"}
+      = 1.week.ago.at_beginning_of_week(:sunday).strftime("%b %e") + " - " + 1.week.ago.end_of_week(:sunday).strftime("%b %e")
+    %i{:class =>(params[:sort_field]=="one_week" ? css_class : "")}
+  %th
+    %a{:href =>"/data_numerical_reports/country_minutes?type=#{params[:type]}&sort_field=current_week&sort=#{sort}"}
+      = 0.week.ago.at_beginning_of_week(:sunday).strftime("%b %e") + " - " + DateTime.now.strftime("%b %e")
+    %i{:class =>(params[:sort_field]=="current_week" || !params[:sort_field].present? ? css_class : "")}

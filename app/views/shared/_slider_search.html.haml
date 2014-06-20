@@ -1,0 +1,37 @@
+- if !defined?(query)
+  - query = ''
+- if !defined?(country_id)
+  - country_id = ''
+- if !defined?(rca_id)
+  - rca_id = ''
+- if !defined?(gateway_id)
+  - gateway_id = ''
+
+.items
+  %ul.slider
+    - if current_page == "1" && controller_name != "/settings" && @stations.length>1
+      %li
+        %a.link{:href => controller_name}
+          %div{:class=>["item",("active" if (controller_name == "/reports" || controller_name == "/graphs") && (!gateway_id.present?) )],:title => "All Stations"}
+            %h4= "All Stations"
+    - stations.each do |station|
+      %li
+        - if controller_name.present? && controller_name != "/" 
+          %a.link{:href => controller_name + "?gateway_id=" + station.id.to_s + "&country_id=" +country_id + "&rca_id="+ rca_id + "&query=" + query + "&current_page="+current_page, :title => station.title, "data-toggle" => "tooltip"}
+            %div{:class=>["item",("active" if ((gateway_id.present? && gateway_id.to_i == station.id) || (gateway_id.empty? && station.id == first_station_id)))],:title => station.title} 
+              - if station.attributes["did_e164"]
+                %h5.title= station.title
+                %h6.did= station.did_e164
+              -else
+                %h5= station.title
+
+        - else
+          %div{:class=>["item",("active" if ((gateway_id.present? && gateway_id.to_i == station.id) || (gateway_id.empty? && station.id == first_station_id)))],:title => station.title} 
+            - if station.attributes["did_e164"]
+              %h5.title= station.title
+              %h6.did= station.did_e164 
+            -else
+              %h5= station.title
+        
+          
+            

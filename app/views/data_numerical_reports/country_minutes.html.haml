@@ -1,0 +1,65 @@
+.graphs
+  -if params[:country_id].present?
+    %h1.page_heading.clearfix=DataGroupCountry.find(params[:country_id]).title
+  #day_graphs
+    -if @day_graphs.present?
+      =render_chart(@day_graphs, "day_graphs")
+  #week_graphs
+    -if @week_graphs.present?
+      =render_chart(@week_graphs, "week_graphs")
+  %div
+    -if params[:type] == "minutes" || params[:type] == "users"
+      -if @result_mini.length > 5
+        %div.left{:style =>"float:left;"}
+          %p= "Current Top 3 Most Growth"
+          =render :partial => "data_numerical_reports/top_3_minutes" ,:locals => {:result => @result_mini.last(3).sort{|a, b| b[3].to_i <=> a[3].to_i}}
+          %br
+        %div.right{:style =>"float:left;"}
+          %p{:class => "drop"}= "Current Top 3 Most Drop"
+          =render :partial => "data_numerical_reports/top_3_minutes", :locals => {:result => @result_mini.first(3).sort{|a, b| b[3].to_i <=> a[3].to_i}}
+          %br
+      -else
+        %p= "Current Top 3 Most Growth"
+        =render :partial => "data_numerical_reports/top_3_minutes" ,:locals => {:result => @result_mini.last(3).sort{|a, b| b[3].to_i <=> a[3].to_i}}
+        %br
+    -elsif params[:type] == "percentage" || !params[:type].present?
+      -if @result_mini.length > 5
+        %div.left{:style =>"float:left;"}
+          %p= "Current Top 3 Most Growth"
+          =render :partial => "data_numerical_reports/top_3_percentage" ,:locals => {:result => @result_mini.first(3)}
+          %br
+        %div.right{:style =>"float:left;"}
+          %p{:class => "drop"}= "Current Top 3 Most Drop"
+          =render :partial => "data_numerical_reports/top_3_percentage", :locals => {:result => @result_mini.last(3).sort{|a, b| b[3].to_i <=> a[3].to_i}}
+        %br
+      -else
+        %p= "Current Top 3 Most Growth"
+        =render :partial => "data_numerical_reports/top_3_percentage" ,:locals => {:result => @result_mini.first(3)}
+        %br
+%div.switcher
+  - if params["type"] == "minutes"
+    %a{:href => "/data_numerical_reports/country_minutes?type=minutes&country_id=#{params[:country_id]}", :class =>"btn_active"} Minutes
+    %a{:href => "/data_numerical_reports/country_minutes?type=percentage&country_id=#{params[:country_id]}", :class =>"btn"} Percentage
+    %a{:href => "/data_numerical_reports/country_minutes?type=users&country_id=#{params[:country_id]}", :class =>"btn"} Users
+  -elsif params["type"] == "percentage"
+    %a{:href => "/data_numerical_reports/country_minutes?type=minutes&country_id=#{params[:country_id]}", :class =>"btn"} Minutes
+    %a{:href => "/data_numerical_reports/country_minutes?type=percentage&country_id=#{params[:country_id]}", :class =>"btn_active"} Percentage
+    %a{:href => "/data_numerical_reports/country_minutes?type=users&country_id=#{params[:country_id]}", :class =>"btn"} Users
+  -elsif params["type"] == "users"
+    %a{:href => "/data_numerical_reports/country_minutes?type=minutes&country_id=#{params[:country_id]}", :class =>"btn"} Minutes
+    %a{:href => "/data_numerical_reports/country_minutes?type=percentage&country_id=#{params[:country_id]}", :class =>"btn"} Percentage
+    %a{:href => "/data_numerical_reports/country_minutes?type=users&country_id=#{params[:country_id]}", :class =>"btn_active"} Users
+  -else
+    %a{:href => "/data_numerical_reports/country_minutes?type=minutes", :class =>"btn"} Minutes
+    %a{:href => "/data_numerical_reports/country_minutes?type=percentage", :class =>"btn_active"} Percentage
+    %a{:href => "/data_numerical_reports/country_minutes?type=users", :class =>"btn"} Users
+%br
+-if params["type"] == "minutes"
+  =render :partial => "data_numerical_reports/country_total_minutes"
+-elsif params["type"] == "percentage" || !params[:type].present?
+  =render :partial => "data_numerical_reports/country_percentage_minutes"
+-elsif params["type"] == "users"
+  =render :partial => "data_numerical_reports/country_users"
+%br
+%div
+  = paginate  @page_no, :params => {:controller => 'data_numerical_reports', :action => 'country_minutes'}

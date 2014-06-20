@@ -1,0 +1,344 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require bootstrap_and_overrides
+ *= require basic
+ *= require custom-form
+ *= require basic
+ *= require gmaps4rails
+ *= require home
+ *= require layout
+ *= require login
+ *= require maps
+ *= require skin
+ *= require visual_reports
+ *= require tracking
+ *= require my_radio
+ *= require data_gateways
+ *= require extentions
+ *= require users_and_tags
+ *= require settings
+ *= require system_variables
+ *= require users
+ *= require data_numerical_reports
+ *= require reports
+ *= require reachout_tab_settings
+ *= require reachout_tab
+ *= require jquery.datetimepicker
+ *= require cpe_dashboard
+ *= require font-awesome
+ *= require campaign_results
+
+*/
+
+.slider_content
+{
+  display: inline-block;
+  position: relative;
+}
+.slider .item
+{
+  box-shadow: 0px 3px 6px #DFDFDF;
+}
+.slider_content .item a
+{
+  margin: 10px 0;
+  font-family: inherit;
+  font-weight: bold;
+  line-height: 20px;
+  color: #11515E;
+  text-rendering: optimizelegibility;
+}
+.slider li {
+  padding: 6px;
+  float: left;
+  list-style: none;
+}
+.slider_content .prev, .slider_content .next
+{
+  display:none;
+  cursor:pointer;
+  font-size: 18px;
+}
+.slider_content .enabled
+{
+  display: block;
+}
+.slider_content .next {
+  position: absolute;
+  top: 87px;
+  right: 5px;
+  width: 32px;
+  height: 71px;
+  cursor: pointer;
+  background: transparent url(next-horizontal-slider.png) no-repeat 0 0;
+}
+.slider_content .prev {  
+  position: absolute;
+  top: 87px;
+  left: 0px;
+  width: 32px;
+  height: 71px;
+  cursor: pointer;
+  background: transparent url(prev-horizontal-slider.png) no-repeat 0 0;
+}
+.did
+{
+  margin:0px !important;
+}
+.item .title
+{
+  margin:0px !important;
+}
+.item h5
+{
+  margin: 0px !important;
+  font-size: 10px !important;
+}
+.slider-loading
+{
+  z-index: 1111;
+  min-height: 800px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  margin-left: -32px;
+  margin-top: -32px;
+  display: block;
+}
+.carousel
+{
+  left:0px;
+  float:left;
+  width: 1900px;
+  position: absolute !important;
+}
+.slider_content
+{
+  overflow: hidden;
+  width: 950px;
+  height:259px;
+}
+.items{
+  width: 950px;
+  float: left;
+}
+
+.inside_slider
+{
+  left: 45px;
+  position: relative;
+  overflow: hidden;
+  width: 860px;
+  height: 259px;
+}
+.inside_slider ul.slider 
+{
+  margin:0px !important;
+}
+/* settings tag */
+.standard
+{
+  width: 870px;
+}
+.language,.genre,.contents .country
+{
+  padding-right: 20px;
+  float: left;
+}
+.station_tags
+{
+  /*width:800px;
+  float:left;*/
+}
+
+.my_radio .standard .radio-select
+{
+  width:202px !important;
+}
+.station
+{  
+  float: left;
+  width: 250px;
+  padding-right: 20px;
+}
+.station_name
+{
+  float: left;
+  padding-right: 20px;
+}
+.broadcaster{
+  float: left;
+  width: 280px;
+  padding-right: 10px;
+}
+.contents{
+  margin-top: 10px;
+}
+.country_title{
+  float:left;
+  padding-right: 20px;
+}
+.contents .country .country_title{
+  float: none;
+  padding-right: 20px;
+}
+.country_name
+{
+  float:left;
+}
+#data_gateway_title,#data_gateway_country_id
+{
+  margin-top: 5px;
+}
+
+.my_radio .standard .row {
+  margin-bottom: 2px;
+}
+.my_radio .standard .tags_rca_container {
+      
+}
+.my_radio .standard .tags_rca {
+}
+.my_radio .standard .tags_rca_title {
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.my_radio .standard .small-select {
+  margin-left: 10px;
+}
+
+.my_radio .standard span.small-select select {
+}
+
+/* new typeahead */
+.twitter-typeahead, .tt-query, .tt-hint {
+  border: 2px solid #CCCCCC;
+  border-radius: 8px;
+  font-size: 14px;
+  height: 30px;
+  line-height: 20px;
+  outline: medium none;
+  padding: 8px 12px;
+  width: 200px;
+}
+.twitter-typeahead {
+  background-color: #FFFFFF;
+}
+.twitter-typeahead:focus {
+  border: 2px solid #0097CF;
+}
+.tt-query {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+  color: #333333;
+}
+.tt-dropdown-menu {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);    
+  padding: 8px 0;
+  width: 422px;
+}
+.tt-suggestion {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 3px 20px;
+  color: #333333;
+}
+.tt-suggestion.tt-is-under-cursor {
+  background-color: #0081C2;
+  color: #FFFFFF;
+}
+.tt-suggestion p {
+  margin: 0;
+}
+
+.background-blue {
+  background: none repeat scroll 0 0 #0E3A55;
+  border: 1px solid #CCCCCC;
+  color: #FFFFFF;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 5px 0 5px 10px;
+  margin: 10px 0;
+  text-indent: 10px;    
+}
+
+/* public activity */
+.activity {
+  padding: 10px;  
+}
+.activity .time {
+  color: #BBBBBB;
+  font-size: 12px;
+}
+.activity .details {
+}
+.activity .details span, .activity span.owner {
+  font-weight: bold;
+}
+.activity .details a {
+  font-weight: bold;
+}
+.col-sm-4 {
+    width: 32.3333%;
+    float:left;
+}
+.mini-stats {
+    border-left: 1px solid #DDDDDD;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+.mini-stats li {
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #DDDDDD;
+    padding-bottom: 6px;
+    text-align: center;
+}
+.mini-stats .sparkline_bar_good, .mini-stats .sparkline_bar_neutral, .mini-stats .sparkline_bar_bad {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+.mini-stats li:last-child {
+    border-right: 0 none;
+}
+.mini-stats .values {
+    font-size: 12px;
+    padding: 10px 0;
+}
+.mini-stats .values strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+.mini-stats .sparkline_bar_good, .mini-stats .sparkline_bar_neutral, .mini-stats .sparkline_bar_bad {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+.mini-stats .sparkline_bar_good {
+    color: #459D30;
+}
+.mini-stats .sparkline_bar_neutral {
+    color: #757575;
+}
+.mini-stats .sparkline_bar_bad {
+    color: #BA1E20;
+}

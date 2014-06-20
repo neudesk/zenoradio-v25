@@ -1,0 +1,18 @@
+.slider
+  - if @no_of_stations > 1 || current_user.is_marketer?
+    = render "shared/slides"
+
+.graphs
+  = select_tag "month", options_for_select(0.upto(11).each_with_index.collect { |m,i| [m.months.ago.strftime("%B %Y"),i ]})
+  -if @gateway_id.present?
+    = select_tag :entryway_id, options_for_select([["All", ""]] + @all_current_user_did.collect { |entryway| [entryway.did_e164, entryway.id]}, params[:did_id] || "" )
+ 
+  %div.loading{:style => "display: none"}
+    %img{:alt => "Loader", :src => "/assets/ajax/loader.gif"}
+  .minutes_graph
+
+- content_for :js do
+  :javascript
+    $(document).ready(function(){
+      window.Reports = new Reports()
+    });

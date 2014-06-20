@@ -1,0 +1,16 @@
+%table{:class=>"table table-bordered table-condensed"}
+  %thead
+    %tr
+      %th{:colspan=>"4"}
+        %i{:class => "icon-refresh make-transparent", :style =>"float:left;margin-right:5px;"}
+        %span=" Summary list"
+    %tr
+      %th
+        %select{:class => "btn",:id => "select_type", :style=>"width:100%"}
+          %option{:value =>"gateway"}="Station"
+          %option{:value =>"content"}="Content/Station"
+          %option{:value =>"entryway"}="Phone Number/Station"
+      %th{:style=>"text-align:center"}Calls
+      %th{:style=>"text-align:center",:colspan=>"2"}Calls / ACD (last 15min)
+  %tbody{:class => "summary_list_body"}
+    = render :partial => "summary_list_body"

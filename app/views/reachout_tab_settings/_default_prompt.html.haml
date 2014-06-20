@@ -1,0 +1,6 @@
+%h4 Upload default prompt
+= form_tag reachout_tab_settings_add_default_prompt_path, :method => :post, :multipart => true do
+  %p=@default_prompt.present? ?  "Default : '" +@default_prompt.prompt_file_name + "'":  "Default : None"
+  %div
+    =file_field_tag :prompt
+    %button{"class" => "btn btn-submit btn-primary send"}= "Upload file"

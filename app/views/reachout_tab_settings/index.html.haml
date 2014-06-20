@@ -1,0 +1,31 @@
+%div.info
+%h1.page_heading.clearfix Settings
+%hr
+%br
+%div
+  .row{:style => "float:left;margin-right:25px;"}
+    = render :partial => "reachout_tab_settings/get_settings"
+  .row{:style => "float:left;"}
+    = render :partial => "reachout_tab_settings/default_prompt"
+    %h4= "Upload DNC File"
+    = render :partial => "reachout_tab_settings/upload_dnc_file"
+%hr{:style => "clear:both;"}
+
+%h4= "DO NOT CALL LIST"
+= render :partial => "reachout_tab_settings/get_dnc_list"
+%hr
+%div.switcher
+  -if params[:type] == "rca" || !params[:type].present?
+    %a{:href => "/reachout_tab_settings/index?type=rca", :class =>"btn_active"} Rca
+    %a{:href => "/reachout_tab_settings/index?type=brd", :class =>"btn"} Broadcast
+  -elsif params[:type] == "brd" 
+    %a{:href => "/reachout_tab_settings/index?type=rca", :class =>"btn"} Rca
+    %a{:href => "/reachout_tab_settings/index?type=brd", :class =>"btn_active"} Broadcast
+%br
+-if params["type"]== "rca" || !params["type"].present?
+  %h1.page_heading.clearfix RCA Reachout Tab
+  = render :partial => "reachout_tab_settings/rca"
+-elsif params[:type] == "brd"
+  %h1.page_heading.clearfix Broadcaster Reachout Tab
+  = render :partial => "reachout_tab_settings/broadcasters"
+

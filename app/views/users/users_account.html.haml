@@ -1,0 +1,68 @@
+.row
+  .col-sm-12
+    .page-header.main
+      - default_filter = params[:user].present? ? params[:user][:filter] : params[:filter] || 0
+      .pull-right.header-buttons
+        = link_to new_user_path, class: "btn btn-primary btn-sm" do
+          %i.clip-user-plus
+          Create New
+      .pull-right.header-buttons.no-margin
+        = search_form_for @q, url: users_account_users_path(filter: default_filter), method: :post do |f|
+          .input-group.short-search
+            = f.text_field :title_or_email_or_sys_user_permission_title_or_tags_title_or_countries_title_cont, placeholder: "Enter Keyword Here", class: "form-control"
+            .input-group-btn
+              = f.submit "Search", class: "btn btn-default submit_search"
+      .pull-right.header-buttons.no-margin
+        - search_val = params[:q].present? ? params[:q][:title_or_email_or_sys_user_permission_title_or_tags_title_or_countries_title_cont] : ""
+        = simple_form_for @user, url: users_account_users_path(q: {"title_or_email_or_sys_user_permission_title_or_tags_title_or_countries_title_cont" => "#{search_val}"} ), method: :post do |f|
+          .input-group.input-group-sm.short-search
+            = f.input :filter, label: false, as: :select, collection: roles_for_new_select_with_all, selected: default_filter, include_blank: false, input_html: {class: "without_css form-control"}
+      %h1
+        = "Users List"
+.row
+  .col-sm-12
+    - if @users.present?
+      %table.table.table-hover.table-striped
+        %thead
+          %tr
+            %th.span2
+              = sort_link(@q, :title, "Title")
+            %th.hidden-xs
+              = sort_link(@q, :email, "Email Address")
+            %th.acenter.hidden-xs
+              = sort_link(@q, :sys_user_permission_title, "Role")
+            %th.acenter.hidden-sm.hidden-xs
+              = link_to "Tags", "#"
+            %th.acenter.hidden-sm.hidden-xs
+              = link_to "Countries", "#"
+            %th
+
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td
+                = user.title
+              %td.hidden-xs
+                = user.email
+              %td.acenter.hidden-xs
+                = html_role(user.role_name, user.permission_id)
+              %td.acenter.hidden-sm.hidden-xs
+                = displayable_tags(user.tags, 3)
+              %td.acenter.hidden-sm.hidden-xs
+                = displayable_countries(user.countries, 3)
+              %td
+                .pull-right
+                  = link_to edit_user_path(user, from: "index"), class: "btn btn-green btn-sm with-margin-right" do
+                    %i.fa.fa-edit
+                    Edit
+                  = link_to user_path(user), class: "btn btn-green btn-sm" do
+                    %i.fa.fa-align-justify
+                    View
+    - else
+      = render "shared/no_records", msg: "No users found."
+    .pagination_area.pull-right
+      = paginate @users
+      
+- if params[:new_user].present?
+  - user = User.find_by_id(params[:new_user])
+  = render "shared/intercom", user: user if user.present?

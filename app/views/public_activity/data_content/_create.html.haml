@@ -1,0 +1,5 @@
+created a new content
+- if activity.trackable
+  %span= link_to activity.trackable.title, data_content_path(activity.trackable), :remote => 'true'
+- else
+  which has since been removed

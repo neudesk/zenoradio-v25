@@ -1,0 +1,180 @@
+// Place all the styles related to the ReachoutTabSettings controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.settings_table
+{
+  width:450px;
+
+}
+.settings_table th
+{
+  text-align: left;
+}
+.settings_table th,.settings_table td
+{
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid #DDDDDD;
+}
+.settings_table tr.even
+{
+  background-color: #F8F8F8;
+}
+.num_value
+{
+  margin-top: 5px;
+  display: none; 
+  width:30px;
+}
+.text_value
+{
+  margin-top: 5px;
+  display: none; 
+  width:120px;
+}
+
+
+.dnc_list
+{
+  padding: 20px;
+  margin: 0px;
+  width:900px;
+  min-height: 150px;
+  border: 1px solid #0081C2;
+}
+.dnc_list li
+{
+  background: url('phone.png') no-repeat;
+  background-size: 13px 13px;
+  padding-left: 20px;
+  padding-right: 10px;
+  float:left;
+  list-style: none;
+}
+.add_phone_number
+{
+
+}
+.add_phone_number input[type='text']
+{
+  margin-top:9px; 
+}
+.info .alert 
+{
+  width: 900px;
+}
+.phone_number
+{
+  float:left;
+}
+.phone_delete
+{
+  background-color: none;
+  border: none;
+  margin-left: 4px;
+  float:right;
+  font-size:13px;font-weight:bold;
+  line-height:20px;color:#000000;
+  text-shadow:0 1px 0 #ffffff;opacity:0.2;
+  filter:alpha(opacity=20);
+  opacity:0.2;
+  filter:alpha(opacity=20);
+}
+.phone_delete:hover,.phone_delete:focus
+{
+  margin-left: 4px;
+  color:#000000;
+  text-decoration:none;
+  cursor:pointer;
+  opacity:0.4;
+  filter:alpha(opacity=40);
+  opacity:0.4;
+  filter:alpha(opacity=40);
+}
+
+.broadcaster_table, .rca_table
+{
+  color:#505050;
+  width:940px;
+}
+.broadcaster_table thead, .rca_table thead
+{
+  border: 1px solid #999999;
+  background-color: #EEE;
+}
+.broadcaster_table th, .rca_table th
+{
+  text-align: left;
+  padding: 5px 5px 5px 20px;
+}
+.broadcaster_table td, .rca_table td
+{
+  text-align: left;
+  padding: 5px 5px 5px 20px;
+}
+.broadcaster_table td.day, .rca_table td.day
+{
+  text-align: center;
+}
+.broadcaster_table th,.broadcaster_table td, .rca_table th, .rca_table td
+{
+  border: 1px solid #DDDDDD;
+}
+.broadcaster_table tr.even , .rca_table tr.even
+{
+  background-color: #F8F8F8;
+}
+.change_status_broadcaster, .change_status_rca
+{
+  cursor: pointer;
+}
+.search_phone_number input[type='text']
+{
+  margin-top:9px; 
+}
+.setting_value
+{
+  text-align: right;
+  margin-right: 5px;
+}
+.settings_form
+{
+  margin-top: 5px;
+  padding: 5px;
+  width: 438px;
+}
+.settings_form input[type='text']
+{
+  margin-top: 9px;
+  width: 150px;
+}
+#highlighted
+{
+  background-color:  rgb(194, 245, 255);
+}
+.add_call, #settings_new
+{
+  cursor: pointer;
+}
+.call_time_form,.settings_form
+{
+  display: none;
+}
+#settings_new
+{
+  display: none;
+}
+.call_time_setting
+{
+  clear: both;
+}
+.call_time_setting p
+{
+  margin-right: 10px;
+  line-height: 37px;
+  float: left;
+}
+call_time_setting input
+{
+  float: left;
+}

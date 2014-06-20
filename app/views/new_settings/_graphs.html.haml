@@ -1,0 +1,13 @@
+.row
+  - if last_week_minutes(@station).present?
+    .col-sm-12
+      .acenter
+        = "Daily Minutes"
+      #minutes_graph{data: {labels: html_days, values: last_week_minutes(@station)}}
+%br/
+.row
+  .col-sm-12
+    .acenter
+      #today_minutes
+        = @station.today_minutes
+      = "TOTAL MINS TODAY"

@@ -1,0 +1,12 @@
+-@stations_result.each do |station|
+  %tr
+    %td
+      %span{:data=>{:bind=>"text: title"}}=station[1]
+      %span{:data=>{:bind=>"visible:gateway_id"},:class=>"pull-right"}
+    %td{:style=>"width:40px; text-align: right",:data=>{:bind=>"text:active_calls_count"}}=station[2]
+    %td{:style=>"width:40px; text-align: right",:data=>{:bind=>"text:past_calls_count"}}=station[3]
+    %td{:style=>"width:120px;"}
+      %div{:class=>"progress",:style=>"width:100%; margin: 0px !important;"}
+        %div{:class=>"bar bar-danger",:data=>{:bind=>"style: { width: past_calls_count_acd_1_percent }"},:style=>"width: #{station[4]}%;"}
+        %div{:class=>"bar bar-warning", :data=>{:bind=>"style: { width: past_calls_count_acd_2_percent }"}, :style=>"width: #{station[5]}%;"}
+        %div{:class=>"bar bar-success", :data=>{:bind=>"style: { width: past_calls_count_acd_3_percent }"},:style=>"width: #{station[6]}%;"}

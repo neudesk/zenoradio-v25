@@ -1,0 +1,35 @@
+#show_data_content_container
+  .modal-header
+    %button{"type" => "button", "class" => "close", "data-dismiss" => "modal", "aria-hidden" => "true"}="×"
+    %h3= @data_content.title
+  .modal-body
+    .row
+      %span.span2 Title:
+      %span
+        %strong= @data_content.title      
+    .row
+      %span.span2 Media Url: 
+      %span
+        %strong= @data_content.media_url
+    - if @data_content.backup_media_url
+      .row
+        %span.span2 Backup Media Url: 
+        %span
+          %strong= @data_content.backup_media_url
+    - if @data_content.data_group_country
+      .row
+        %span.span2 Country: 
+        %span
+          %strong= @data_content.data_group_country.title
+    - if @data_content.data_group_language
+      .row
+        %span.span2 Language: 
+        %span
+          %strong= @data_content.data_group_language.title
+    - if @data_content.data_group_genre
+      .row
+        %span.span2 Genre: 
+        %span
+          %strong= @data_content.data_group_genre.title 
+  .modal-footer
+    %button{"class" => "btn btn-cancel", "data-dismiss" => "modal", "aria-hidden" => "true"}= "Close"    

@@ -1,0 +1,21 @@
+= render "shared/slides"
+%h1.page_heading.clearfix Schedule Campaign
+- if params[:gateway_id].present?
+  -if @campaigns.present?
+    %a{:id => "campaigns"}
+      = "Show campaigns(#{@campaigns.present? ? @campaigns_length : "" })"
+      %br
+      %br
+    %div{:class => ("campaign_box" if !params[:page].present?)}
+      = render :partial => "/reachout_tab/campaigns"
+  = render :partial => "/reachout_tab/schedule"
+.show_content_section
+  .modal.hide.fade{:id => "showContentModal", :tabindex => "-1", :role => "dialog"}
+
+- content_for :js do
+  :javascript
+        $(function() {
+           window.ReachoutTab = new ReachoutTab()
+        });
+
+    

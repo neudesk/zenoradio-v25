@@ -1,0 +1,20 @@
+%div.search_phone_number
+  %input{:type => "text", :id => "txt_rca_search",:placeholder => "Search", :value => params[:search].present? ? params[:search] : "" } 
+  %a{:class => "btn", :id => "search_rca" }= "Search"
+%table.rca_table
+  %thead
+    %tr
+      %th= "#"
+      %th= "Name"
+      %th= "Status"
+      %th= "Action"
+    %tbody
+      -@rca.each_with_index do |brd,index|
+        - active = brd.reachout_tab_is_active
+        %tr{:class => cycle('odd', 'even'), :id => brd.id}
+          %td= index+1
+          %td= brd.title
+          %td= active.present? && active == true ? "Active" : "Inactive"
+          %td
+            %a{:class => "change_status_rca", :data => {:id => brd.id,:status => active.present? && active == true ? "false" : "true", :index => index+1, :name => brd.title}}= active.present? && active == true ? "Disable" : "Enable"
+= paginate  @page_no

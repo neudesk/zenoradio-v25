@@ -1,0 +1,53 @@
+.slider
+  = render "shared/slides"
+.tracking.tracking_stations
+  .row.top-listeners
+    %h1.page_heading Tracking Stations
+    .standard.no-borders
+      .generate_report_section
+        = form_tag tracking_stations_path, :method => :get do |f|
+          .pull-left.station_input_section
+            .sec_con
+              %p
+                %label.pull-left Station
+              %p.pull-left
+                %span.radio-select= select_tag :gateway_id, options_for_select([["All", ""]] + @all_current_user_gateways.collect { |gateway| [gateway.title, gateway.id]}, params[:gateway_id] || "" )
+            
+          .pull-left.time_input_section
+            .sec_con
+              %p
+                %label.pull-left Time
+              %p.pull-left
+                %span.radio-select= select_tag :time, options_for_select(get_hours_list, params[:time])
+          .pull-left.generate_button_section{:style => "margin-top:32px;"}
+            = submit_tag "Generate Report", :style => "padding: 10px;margin-left:20px", :class => "btn"
+      %table.table.tracking_stations_table.table-striped.table-hover.pretty
+        %thead
+          %tr
+            %th.date{ROWSPAN:2, :style => "width:200px;text-align:center;vertical-align:middle;"}= "DID"
+            %th.time.align-center= "Seven days back"
+            %th.minute.align-center= "Previous day"
+            %th.name.align-center= "Current day"
+            %th.number.align-center= "Next two days"
+          %tr
+            %th.time.align-center= "#{@seven_days_back.strftime("%b %d")} -> #{@current_day.strftime("%b %d")}"
+            %th.minute.align-center= "#{@previous_day.strftime("%b %d")}"
+            %th.name.align-center= "#{@current_day.strftime("%b %d")}"
+            %th.number.align-center= "#{@next_1_day.strftime("%b %d")} -> #{@next_2_day.strftime("%b %d")}"
+
+        %tbody
+          - @seven_days_back_did_records.each_with_index do |report, index|
+            %tr
+              %td.align-center= @seven_days_back_did_records[index].did || 0
+              %td.align-center= @seven_days_back_did_records[index].total_minutes || 0
+              %td.align-center= @previous_day_did_records[index].total_minutes || 0
+              %td.align-center= @current_day_did_records[index].total_minutes || 0
+              %td.align-center= @next_two_days_did_records[index].total_minutes || 0
+      - if @seven_days_back_did_records.length > 0
+        = paginate @seven_days_back_did_records
+  .row.top-listeners
+    .standard
+      .chart-content
+        %center
+          %div{:id => "chart_1", :style => "margin-bottom: 10px;" }
+          = render_chart(@chart, "chart_1")

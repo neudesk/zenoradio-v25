@@ -1,0 +1,32 @@
+#reports
+  %table.campaign_table
+    %thead
+      %tr
+        %th Gateway
+        %th DID
+        %th Created
+        %th Schedule
+        %th File Name
+        %th Sent to Listeners by:
+        %th Status
+        %th Call Status
+        %th Delete
+    %tbody
+      - @campaigns.each do |campaign|
+        %tr
+          %td= campaign.gateway_id
+          %td= campaign.did_e164
+          %td= campaign.created_at.localtime.strftime("%Y-%m-%d %H:%M")
+          %td= campaign.schedule_start_date.strftime("%Y-%m-%d %H:%M")
+          %td{:title => campaign.prompt_file_name }= campaign.prompt_file_name.present? ? campaign.prompt_file_name.truncate(15) : ""
+          %td NULL
+          %td= campaign.status == true ? "Active" : "Inactive"
+          %td
+            - if campaign.id.present?
+              %a{:remote =>'true', :class=> "show_campaign_status", :data => {:id =>campaign.id}} View
+            - else
+              No status
+          %td 
+            = link_to content_tag(:i, "", class: "icon-trash icon-white"), reachout_tab_destroy_campaign_path(:id => campaign.id) , method: :delete, class: "btn btn-danger remove_fields", :confirm => "Are you sure ?"
+%div
+  = paginate  @campaigns

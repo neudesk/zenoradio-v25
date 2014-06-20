@@ -1,0 +1,48 @@
+#graphs
+  = render_chart(total_minutes, "graphs")
+#reports
+  %table.reports_table
+    %thead
+      %tr
+        %th{:colspan =>'4'} Clients
+        %th{:colspan =>'2'}   
+      %tr
+        %th{:colspan =>'2'} Day
+        %th{:title =>"A new listener who has not called within 30 days"} New users
+        %th{:title =>"A listener who has called within last 30 days"} Active users
+        %th{:title =>"Amount of Calls to your Phone Number"} Sessions
+        %th{:title =>"Minutes - Total Radio Minutes Listened"} Minutes
+    %tbody
+    - (month.beginning_of_month.strftime("%Y-%m-%d")..month.end_of_month.strftime("%Y-%m-%d")).each do |day|
+      -day = DateTime.parse(day)
+      -if reports.present?
+        -rep = reports.detect {|report| report[0].strftime("%-d") == day.strftime("%-d")}
+        %tr{:class => cycle('odd', 'even')} 
+          %td{:class =>"day_no"}= rep.present? ? rep[0].strftime("%e") : day.strftime("%e")
+          %td{:class =>"day_name"}= rep.present? ? rep[0].strftime("%a") : day.strftime("%a")
+          %td{:title =>"A new listener who has not called within 30 days"}= rep.present? ? rep[1] : 0 
+          %td{:title =>"A listener who has called within last 30 days"}= rep.present? ? rep[2] : 0
+          %td{:title =>"Amount of Calls to your Phone Number"}= rep.present? ? rep[3] : 0
+          %td{:title =>"Minutes - Total Radio Minutes Listened"}= rep.present? ? rep[4] : 0
+      -else
+        %tr{:class => cycle('odd', 'even')} 
+          %td{:class =>"day_no"}= day.strftime("%e")
+          %td{:class =>"day_name"}= day.strftime("%a")
+          %td= 0
+          %td= 0
+          %td= 0
+          %td= 0
+    %tfoot
+      %tr.even
+        %td{:colspan => '2'}
+          %b= "Total"
+        %td
+          %b= @totals[0].present? ? @totals[0] : "0"
+        %td
+          %b= @totals[1].present? ? @totals[1] : "0"
+        %td
+          %b= @totals[2].present? ? @totals[2] : "0"
+        %td
+          %b= @totals[3].present? ? @totals[3] : "0"
+        
+       

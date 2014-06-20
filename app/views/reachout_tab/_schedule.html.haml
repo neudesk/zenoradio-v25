@@ -1,0 +1,34 @@
+= form_tag save_reachout_tab_index_path, :method => :post, :multipart => true do
+  = hidden_field_tag  "gateway_id", params[:gateway_id]
+  = hidden_field_tag  "schedule_type"
+  %p{:style=>"color:red", :class=>"error"}
+  .row
+    %h3= @last_called.present? ? "Last Called - " + @last_called.schedule_start_date.strftime("%Y-%m-%d").to_s : "Last Called - None"
+    %h5= "Active listeners : " + @listeners_length.to_s
+  .row 
+    %label Choose DID to display 
+    #data_entryway
+      =render :partial => "reachout_tab/dids"
+    =image_tag("loading.gif", class: "hide loading_did")
+  .row
+    %p Upload Prompt
+    %div
+      =file_field_tag :prompt
+  %div{:style=>"clear:both;margin:15px;"} 
+  .row
+    %input{:type =>"radio", :name =>"schedule", :checked => true, :value => "send_now", :class => "schedule" }
+      %span{:class => "schedule_lbl"}Send now
+    %br
+    %br
+    %div
+      %input.span2{:size => "16", :type=>"text", :id => "hourpicker",:name =>"schedule_hour", :readonly => true, :placeholder => "Select hour"}
+    %input{:type =>"radio", :name =>"schedule",:checked => false, :value => "send_later", :class => "scheduler" }
+      %span Send later
+  %div{:style=>"clear:both;margin:15px;"} 
+  %div
+    %input.span2{:size => "16", :type=>"text", :id => "datepicker",:name =>"schedule_date", :readonly => true, :placeholder => "Select date"}
+  %br
+  %button{"class" => "btn btn-submit btn-primary send"}= "SCHEDULE CAMPAIGN"
+  %div{:style=>"clear:both;margin:15px;"}
+ 
+    

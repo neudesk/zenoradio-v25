@@ -1,0 +1,91 @@
+= simple_form_for @user do |f|
+  .row-fluid
+    .col-sm-6
+      .user-left
+        %table.table.table-hover.no-border.small-padding
+          %thead
+            %tr.no-border
+              %th{colspan: 2}
+                %h3= "Account Information"
+          %tbody
+            %tr
+              %td.col-sm-4
+                = f.label :company_name, label: "Company/Name"
+              %td.col-sm-8
+                = f.input :company_name, label: false, input_html: {class: "form-control"}
+            %tr
+              %td= f.label :name, label: "Contact Name"
+              %td= f.input :name, label: false, input_html: {class: "form-control"}
+            %tr
+              %td= f.label :email, label: "Email Address"
+              %td= f.input :email, label: false, input_html: {class: "form-control"}
+
+        %table.table.table-hover.no-border.small-padding
+          %thead
+            %tr.no-border
+              %th{colspan: 2}
+                %h3= "Contact Information"
+          %tbody
+            %tr
+              %td.col-sm-4
+                %i.clip-phone-4
+                = f.label :phone, label: "Phone"
+              %td.col-sm-8
+                = f.input :phone, input_html: {class: "form-control"}, label: false
+            %tr
+              %td= f.label :address, label: "Address"
+              %td= f.input :address, input_html: {class: "form-control"}, label: false
+            %tr
+              %td
+                %i.clip-earth-2
+                = f.label :city, label: "City"
+              %td= f.input :city, input_html: {class: "form-control"}, label: false
+            %tr
+              %td
+                %i.fa.fa-globe
+                = f.label :state, label: "State"
+              %td= f.input :state, input_html: {class: "form-control"}, label: false
+            %tr
+              %td
+                %i.fa.fa-facebook-square
+                = f.label :facebook, label: "facebook"
+              %td= f.input :facebook, input_html: {class: "form-control"}, label: false
+            %tr
+              %td
+                %i.fa.fa-twitter-square
+                = f.label :twitter, label: "Twitter"
+              %td= f.input :twitter, input_html: {class: "form-control"}, label: false  
+            %tr
+              %td
+                = f.label :country, label: "Country"
+              %td= f.input :country, label: false, as: :select, collection: DataGroupCountry.all.collect { |x| [x.title, x.title] }
+
+    .col-sm-6
+      %table.table.table-hover.no-border.small-padding
+        %thead
+          %tr.no-border
+            %th{colspan: 2}
+              %h3= "Station Information"
+        %tbody
+          %tr
+            %td.col-sm-3
+              = f.label :station_name, label: "Station Name"
+            %td.col-sm-9
+              = f.input :station_name, label: false, input_html: {class: "form-control"}
+          %tr
+            %td= f.label :streaming_url, label: "Streaming URL"
+            %td= f.input :streaming_url, label: false, input_html: {class: "form-control"}
+          %tr
+            %td= f.label :website, label: "Website"
+            %td= f.input :website, label: false, input_html: {class: "form-control"}
+          %tr
+            %td= f.label :language, label: "Language"
+            %td= f.input :language, label: false, input_html: {class: "form-control"}
+          %tr
+            %td= f.label :genre, label: "Genre"
+            %td= f.input :genre, label: false, input_html: {class: "form-control"}
+          %tr
+            %td= f.label :on_air_schedule, label: "On-Air Schedule"
+            %td= f.input :on_air_schedule, label: false, input_html: {class: "form-control"}, placeholder: "Should be in EST format"
+      .pull-right
+        = f.submit "Sign Up", class: "btn btn-primary btn-lg"

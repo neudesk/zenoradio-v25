@@ -1,0 +1,144 @@
+.row
+  .col-sm-12
+    .page-header.main
+      .pull-right.header-buttons
+        = link_to switch_user_path(@user), class: "btn btn-primary with-margin-right", method: :post do
+          %i.clip-users
+          Login as this user
+        = link_to edit_user_path(@user), class: "btn btn-primary with-margin-right" do
+          %i.fa.fa-edit
+          Edit
+        = link_to users_account_users_path, class: "btn btn-primary with-margin-right" do
+          %i.fa.fa-hand-o-left
+          Back
+        - if current_user.is_marketer?
+          = link_to new_user_path, class: "btn btn-primary" do
+            %i.clip-user-plus
+            Create New
+      %h1
+        = "Users Info"
+
+.row
+  .col-sm-5
+    .user-left
+      %table.table.table-condensed.table-hover
+        %thead
+          %tr
+            %th{colspan: 2}
+              = "Account Information"
+        %tbody
+          %tr
+            %td.col-sm-5
+              = "Company/Name"
+            %td.col-sm-7
+              = @user.name
+          %tr
+            %td= "Title/Contact Name"
+            %td= @user.title
+          %tr
+            %td= "Email"
+            %td= @user.email
+          %tr
+            %td= "Role"
+            %td= html_role(@user.role_name, @user.permission_id)
+          %tr
+            %td= "Status"
+            %td= display_status(@user.enabled? ? "enabled" : "disabled")
+          %tr
+            %td= "Password"
+            %td= @user.barcode || "********"
+          %tr
+            %td
+            %td
+      %table.table.table-condensed.table-hover
+        %thead
+          %tr
+            %th{colspan: 2}
+              = "Contact Information"
+        %tbody
+          %tr
+            %td.col-sm-4
+              %i.clip-phone-4
+              = "Phone"
+            %td.col-sm-8
+              = @user.landline
+          %tr
+            %td= "Address"
+            %td= @user.address
+          %tr
+            %td
+              %i.clip-earth-2
+              = "City"
+            %td= @user.city
+          %tr
+            %td
+              %i.fa.fa-globe
+              = "State"
+            %td= @user.state
+          %tr
+            %td
+              %i.fa.fa-facebook-square
+              = "Facebook"
+            %td= @user.facebook
+          %tr
+            %td
+              %i.fa.fa-twitter-square
+              = "Twitter"
+            %td= @user.twitter
+          %tr
+            %td= "Tags"
+            %td= displayable_tags(@user.tags)
+          %tr
+            %td= "Countries"
+            %td= displayable_countries(@user.countries)
+          %tr
+            %td
+            %td
+  - unless @user.is_marketer?
+    .col-sm-7
+      %ul.activities
+        %li
+          %i.clip-user-3.circle-icon.circle-green
+          %span.desc= "RCA: #{@user.rca}"
+        %li
+          %i.clip-cube-2.circle-icon.circle-bricky
+          %span.desc= "Affiliate: #{@user.affiliate}"
+        %li
+          %i.clip-clock-2.circle-icon.circle-teal
+          %span.desc= "Member Since: #{html_date(@user.created_at)}"
+      %br/
+      %table.table.table-condensed.table-hover
+        %thead
+          %tr
+            %th{colspan: 2}
+              = "Station Information"
+        %tbody
+          %tr
+            %td.col-sm-3
+              = "Station Name"
+            %td.col-sm-9
+              = @user.station_name
+          %tr
+            %td= "Streaming URL"
+            %td= @user.streaming_url
+          %tr
+            %td= "Website"
+            %td= @user.website
+          %tr
+            %td= "Language"
+            %td= @user.language
+          %tr
+            %td= "Genre"
+            %td= @user.genre
+          %tr
+            %td= "On-Air Schedule"
+            %td= @user.on_air_schedule
+          %tr
+            %td
+            %td
+
+
+
+            
+- if params[:new_user].present?
+  = render "shared/intercom", user: @user

@@ -1,0 +1,8 @@
+deleted a content
+- if activity.trackable
+  %span= link_to activity.trackable.title, data_content_path(activity.trackable), :remote => 'true'
+  - if activity.parameters[:channel_no]
+    = "(Extension no: " + activity.parameters[:channel_no] + ")"
+  = activity.parameters[:media_url]
+- else
+  which has since been removed

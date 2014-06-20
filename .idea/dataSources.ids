@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Rails zenoradio: development" uuid="2adb0474-68da-434b-bfce-dd09df9a2135">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails zenoradio: staging" uuid="0911bbc4-536e-4371-ad16-c9c397a3d90c">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails zenoradio: production" uuid="16175623-7f0d-48ba-ae5c-3cf41b6cc64b">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails zenoradio: test" uuid="d33b4940-255b-4f14-a3be-1a1ef81faa44">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails zenoradio: cucumber" uuid="2248f96d-6251-4bf8-93a2-9d3c8db3cf2c">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>

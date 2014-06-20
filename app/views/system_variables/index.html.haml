@@ -1,0 +1,10 @@
+.system_variables_page
+  .slider
+    = render "shared/slides"
+
+  .standard.email_section
+    = simple_nested_form_for(@email_config_form, :url => update_email_system_variables_path(@prompt), :method => :put, :html => { :class => 'email_form'}) do |f|
+      = f.label :Content_request_email_address, :class => "email_label"
+      = f.input_field :email, {:class => "email_field", :placeholder => @email, :value => @email}
+      .save_section
+        = f.submit "Update", :class => "btn update_btn"

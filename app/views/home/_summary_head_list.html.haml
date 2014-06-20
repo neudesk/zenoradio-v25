@@ -1,0 +1,8 @@
+%div{:class=>"well", :style=>"padding-top:0px;"}
+  %h3
+    %span{:data=>{:bind=>"text:total.sessions"}}
+      =" Sessions " + @result_total[0].to_s + " now "
+    %i{:class => "icon-refresh", :style => "font-size:14px;"}
+  %span{:data=>{:bind=>"text:total.stations"}}="in " + @result_total[2].to_s + " stations, "
+  %span{:data=>{:bind=>"text:total.contents"}}= @result_total[1].to_s + " contents "
+  %span{:data=>{:bind=>"text:total.servers"}}= "and " + @result_total[3].to_s + " servers "

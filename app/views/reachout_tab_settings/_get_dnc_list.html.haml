@@ -1,0 +1,11 @@
+%div.add_phone_number
+  %input{:type => "text", :id => "txt_phone",:placeholder => "Phone ex: +11234567891"}
+  %a{:class => "btn", :id => "add_phone"}="Add phone number"
+%div.search_phone_number
+  %input{:type => "text", :id => "txt_search",:placeholder => "Search"}
+  %a{:class => "btn", :id => "btn_search"}="Search"
+%ul{:style => "height: 50px;overflow-y: scroll;", :class => "dnc_list"}
+  -@dnc_list.each do |dnc|
+    %li{:id => dnc.id}
+      %p.phone_number=dnc.phone_number
+      %button{:class => "phone_delete", :data =>{:val => dnc.id} }= "x"

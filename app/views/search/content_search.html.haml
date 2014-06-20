@@ -1,0 +1,35 @@
+%h1.page_heading.clearfix Search Content
+.content_search_form
+  %form{"action" => search_content_search_path, "method" => 'get'}
+    = text_field_tag :content_query, @content_query
+    %button{"class" => "btn btn-submit", "style" => "margin-top: -11px"}= "Search Content"
+.content_search_results
+  - if @content_query.present?
+    - if @contents.nil? || @contents.empty?
+      %h3= "No Results for: \"#{@content_query}\""
+    -else
+      %h3= "Results for: \"#{@content_query}\""
+    
+    %table.table.table-striped.table-hover
+      %tbody
+        - @contents.each do |content|
+          %tr
+            %td{"colspan" => "4"}
+              &nbsp;            
+          %tr.info
+            %td{:title => content.title}= truncate(content.title, :length => 40)
+            %td{:title => content.media_url}= truncate(content.media_url,:length =>60)
+            %td= link_to "Edit", edit_data_content_path(content, :content_query => @content_query), :class => "edit_data_content_link", :remote => 'true'
+            -if current_user.is_marketer?
+              %td= link_to "Delete", data_content_path(content.id, :content_query => @content_query), method: "delete", :confirm => "Are you sure?"
+
+          -content.data_gateways.each do |gateway|
+            %tr
+              %td{"colspan" => "4"} 
+                %a.link{:href => "/settings?gateway_id=" + gateway.id.to_s + "&query=" + gateway.title, :title => gateway.title}
+                  = gateway.title
+    - if @contents.length > 0
+      =paginate @contents
+                  
+.add_existing_content_section
+  .modal.hide.fade{id: "editContentModal", tabindex: "-1", role: "dialog"}

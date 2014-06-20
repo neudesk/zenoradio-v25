@@ -1,0 +1,28 @@
+.slider
+  - if @no_of_stations > 1 || current_user.is_marketer?
+    = render "shared/slides"
+
+  .chart_c.margin-top-10.pull-left
+    #chart_content_c
+      #lloading.hide
+      -if !current_user.is_thirdparty?
+        = render :partial => "charts/chart_c"
+    %center.margin-top-5
+      -if !current_user.is_thirdparty?
+        = select_tag "line_chart", options_for_select({"Today" => "0", "Yesterday" => "1", "7 days" => "7", "30 days" => "30", "90 days" => "90"}, "0"), :class=>"width-select"
+        = select_tag "line_chart_ext", options_for_select(@options_for_chart_c, "0"), :class=>"width-select"
+
+  .total_chart.margin-text.margin-top-10.pull-left
+    #total_chart_content
+      #lloading.hide
+      = render :partial => "charts/total_chart"
+    %center.margin-top-5
+      = select_tag "total_chart_day", options_for_select({"7 days" => "7", "14 days" => "14", "30 days" => "30"}, "7"), :class=>"width-select"
+      -if @gateway_id.present?
+        = select_tag "total_chart_ext", options_from_collection_for_select(@channels,'id','title'),:prompt => 'All', :class=>"width-select"
+
+- content_for :js do
+  :javascript
+    $(document).ready(function(){
+      window.Graphs = new Graphs()
+    });
