@@ -39,4 +39,6 @@
 //=require plugins/flot/jquery.flot.categories
 //=require plugins/flot/jquery.flot.pie
 //=require charts
+//= require underscore
+//= require gmaps/google
 

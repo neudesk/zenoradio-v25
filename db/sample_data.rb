@@ -14,9 +14,9 @@ thirdparty_permission = SysUserPermission.find_by_title("Thirdparty User")
 broadcast_permission = SysUserPermission.find_by_title("Broadcast User")
 
 rca_1 = rca_permission.users.create({
-  email: "rca1@zenoradio.com",
-  password: "1234qwer",
-  password_confirmation: "1234qwer",
+  email: "jon@zenoradio.com",
+  password: "ABC12abc",
+  password_confirmation: "ABC12abc",
   enabled: true
 })
 
